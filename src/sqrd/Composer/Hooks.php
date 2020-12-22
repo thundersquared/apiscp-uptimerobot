@@ -10,7 +10,7 @@ class Hooks
     const APISCSTM = '/usr/local/apnscp/config/custom';
     public static function postUpdate(Event $event) : void
     {
-        if (is_dir(static::APISCSTM . '/apps/login/views/partials/'))
+        if (!is_dir(static::APISCSTM . '/apps/login/views/partials/'))
         {
             mkdir(static::APISCSTM . '/apps/login/views/partials/', 755, true);
         }
