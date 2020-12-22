@@ -20,3 +20,12 @@ This extensions provides an implementation for ApisCP to fetch network status fr
    cpcmd scope:set cp.config extensions uptimerobot_page abc123
    ```
 5. Wait for Apache to reload and check out your panel.
+
+## Updating
+
+Just a copy-pasta:
+```
+cd /usr/local/apnscp/extensions/apiscp-uptimerobot
+git pull
+composer update
+```
