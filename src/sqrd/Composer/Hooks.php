@@ -12,7 +12,7 @@ class Hooks
     {
         if (!is_dir(static::APISCSTM . '/apps/login/views/partials/'))
         {
-            mkdir(static::APISCSTM . '/apps/login/views/partials/', 755, true);
+            mkdir(static::APISCSTM . '/apps/login/views/partials/', 0755, true);
         }
 
         copy('src/sqrd/ApisCP/Extensions/views/status.blade.php', static::APISCSTM . '/apps/login/views/partials/status.blade.php');
