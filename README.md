@@ -12,7 +12,7 @@ This extensions provides an implementation for ApisCP to fetch network status fr
    sudo -u apnscp mkdir -p extensions
    sudo -u apnscp git clone https://github.com/thundersquared/apiscp-uptimerobot.git extensions/apiscp-uptimerobot
    cd extensions/apiscp-uptimerobot
-   sudo -u apnscp apnscp_php composer install
+   sudo -u apnscp composer install
    ```
 4. Set your status page URL and ID.
    ```
@@ -27,5 +27,5 @@ Just a copy-pasta:
 ```
 cd /usr/local/apnscp/extensions/apiscp-uptimerobot
 sudo -u apnscp git pull
-sudo -u apnscp apnscp_php composer update
+sudo -u apnscp composer update
 ```
