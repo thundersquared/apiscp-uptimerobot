@@ -20,6 +20,6 @@ class Hooks
 
         exec(sprintf('cd %s ; composer dumpautoload -o', static::APISDIR));
 
-        echo "You're done!";
+        echo "You're done!" . PHP_EOL;
     }
 }
