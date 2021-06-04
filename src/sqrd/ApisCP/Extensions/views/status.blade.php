@@ -3,9 +3,11 @@
         $monitor = new \sqrd\ApisCP\Extensions\UptimeRobot();
         $status = $monitor->getNetworkStatus();
     @endphp
-    <a data-toggle="tooltip"
-       title="{{ $status }}"
-       href="{{ $monitor->getStatusPage() }}">
-		<span class="fa fa-circle mr-1 {{ $monitor->textByStatus($status) }}"></span><span>Network Status</span>
-    </a>
+    @if($status && $monitor->getStatusPage())
+        <a data-toggle="tooltip"
+           title="{{ $status }}"
+           href="{{ $monitor->getStatusPage() }}">
+            <span class="fa fa-circle mr-1 {{ $monitor->textByStatus($status) }}"></span><span>Network Status</span>
+        </a>
+    @endif
 </div>

@@ -14,7 +14,9 @@
             "sqrd\\Composer\\": "src/"
         }
     },
-    "require": {},
+    "require": {
+        "ext-json": "*"
+    },
     "scripts": {
         "post-update-cmd": "sqrd\\Composer\\Hooks::postUpdate"
     }
