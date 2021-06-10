@@ -34,8 +34,8 @@ class UptimeRobot
 
         if (false !== ($status = $cache->get($key)))
         {
-            // Mark as not determined if cache is empty
-            $status = static::NOT_DETERMINED;
+            // Return cached status if found
+            return $status;
         }
 
         try
@@ -51,7 +51,7 @@ class UptimeRobot
             if ($resp->getStatus() !== 200)
             {
                 // Return if status was not 200, which should result in static::NOT_DETERMINED
-                return $status;
+                return static::NOT_DETERMINED;
             }
 
             $body = json_decode($resp->getBody());

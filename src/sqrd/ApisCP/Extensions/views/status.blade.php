@@ -3,7 +3,7 @@
         $monitor = new \sqrd\ApisCP\Extensions\UptimeRobot();
         $status = $monitor->getNetworkStatus();
     @endphp
-    @if($status && $monitor->getStatusPage())
+    @if(!is_null($status) && $monitor->getStatusPage())
         <a data-toggle="tooltip"
            title="{{ $status }}"
            href="{{ $monitor->getStatusPage() }}">
