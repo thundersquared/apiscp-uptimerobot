@@ -45,6 +45,8 @@ class UptimeRobot
             $adapter = new HTTP_Request2_Adapter_Curl();
             $req = new HTTP_Request2($url, HTTP_Request2::METHOD_GET, [
                 'adapter' => $adapter,
+                'connect_timeout' => 5,
+                'timeout' => 5,
             ]);
 
             $resp = $req->send();
