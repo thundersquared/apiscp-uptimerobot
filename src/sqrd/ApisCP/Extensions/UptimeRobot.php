@@ -15,10 +15,22 @@ class UptimeRobot
     const OPERATIONAL = 'Operational';
     const MAJOR_OUTAGE = 'Major outage';
     const PARTIAL_OUTAGE = 'Partial outage';
+    const TIMEOUT = 5;
 
     public function getStatusPage(): ?string
     {
         return static::STATUS_URL ?? null;
+    }
+
+    protected function performRequest($url)
+    {
+        $adapter = new HTTP_Request2_Adapter_Curl();
+        $request = new HTTP_Request2($url, HTTP_Request2::METHOD_GET, ['adapter' => $adapter]);
+        $request->setConfig('connect_timeout', self::TIMEOUT);
+        $request->setConfig('timeout', self::TIMEOUT);
+        $response = $request->send();
+        if ($response->getStatus() !== 200) return false;
+        return json_decode($response->getBody());
     }
 
     public function getNetworkStatus(): ?string
@@ -42,21 +54,8 @@ class UptimeRobot
         {
             // Try to retrieve API data
             $url = sprintf('https://stats.uptimerobot.com/api/getMonitorList/%s', static::STATUS_PAGE);
-            $adapter = new HTTP_Request2_Adapter_Curl();
-            $req = new HTTP_Request2($url, HTTP_Request2::METHOD_GET, [
-                'adapter' => $adapter,
-                'connect_timeout' => 5,
-                'timeout' => 5,
-            ]);
-
-            $resp = $req->send();
-            if ($resp->getStatus() !== 200)
-            {
-                // Return if status was not 200, which should result in static::NOT_DETERMINED
-                return static::NOT_DETERMINED;
-            }
-
-            $body = json_decode($resp->getBody());
+            $body = $this->performRequest($url);
+            if ($body === false) return static::NOT_DETERMINED;
 
             // Search for stats data
             if (isset($body->statistics->counts))
